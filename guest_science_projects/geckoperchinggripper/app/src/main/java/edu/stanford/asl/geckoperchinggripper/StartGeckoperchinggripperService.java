@@ -181,33 +181,33 @@ public class StartGeckoperchinggripperService extends StartGuestScienceService {
             switch (sCommand) {
                 // You may handle your commands here
                 case "gecko_gripper_open":
-                    gecko_gripper_node.sendOpenGripper()
+                    gecko_gripper_node.sendOpenGripper();
                     break;
                 case "gecko_gripper_close":
-                    gecko_gripper_node.sendCloseGripper()
+                    gecko_gripper_node.sendCloseGripper();
                     break;
                 case "gecko_gripper_engage":
-                    gecko_gripper_node.sendGripperEngage()
+                    gecko_gripper_node.sendGripperEngage();
 
                     handler.postDelayed(statusRefresh, STATUS_WAIT_MS);
                     break;
                 case "gecko_gripper_disengage":
-                    gecko_gripper_node.sendGripperDisengage()
+                    gecko_gripper_node.sendGripperDisengage();
 
                     handler.postDelayed(statusRefresh, STATUS_WAIT_MS);
                     break;
                 case "gecko_gripper_lock":
-                    gecko_gripper_node.sendGripperLock()
+                    gecko_gripper_node.sendGripperLock();
 
                     handler.postDelayed(statusRefresh, STATUS_WAIT_MS);
                     break;
                 case "gecko_gripper_unlock":
-                    gecko_gripper_node.sendGripperUnlock()
+                    gecko_gripper_node.sendGripperUnlock();
 
                     handler.postDelayed(statusRefresh, STATUS_WAIT_MS);
                     break;
                 case "gecko_gripper_engage_lock":
-                    gecko_gripper_node.sendGripperEngageLock()
+                    gecko_gripper_node.sendGripperEngageLock();
 
                     handler.postDelayed(statusRefresh, STATUS_WAIT_MS);
                     break;
