@@ -322,6 +322,24 @@ public class StartGeckoperchinggripperService extends StartGuestScienceService {
                     }
 
                     break;
+                case "gecko_gripper_arm_deploy_90":
+                    try {
+                      JSONObject armDeployJson= new JSONObject();
+                      Result armDeployResult = api.armDeployNinety();
+
+                      if (armDeployResult.hasSucceeded()) {
+                        armDeployJson.put("Status", "Arm deployment succeeded");
+                      } else {
+                        armDeployJson.put("Status", "Arm deployment failed");
+                      }
+                      sendData(MessageType.JSON, "Arm deploy ", armDeployJson.toString());
+                    } catch (JSONException e) {
+                        // Send an error message to the GSM and GDS
+                        e.printStackTrace();
+                        sendData(MessageType.JSON, "data", "ERROR parsing JSON");
+                    }
+
+                    break;
                 case "gecko_gripper_perch_pan_test":
                     boolean pan_test_succeeded = api.perchPanTest();
                     JSONObject perchPanResult = new JSONObject();
@@ -432,7 +450,7 @@ public class StartGeckoperchinggripperService extends StartGuestScienceService {
                     // Send message to user that delay is being sent
                     JSONObject setDelayJson = new JSONObject();
                     setDelayJson.put("Gripper Cmd", "Sending command to set delay")
-                                .put("DL", DL_);
+                                .put("DL_MS", DL_);
                     sendData(MessageType.JSON, "Command", setDelayJson.toString());
                     gecko_gripper_node.sendSetDelay(DL_);
 
@@ -464,14 +482,14 @@ public class StartGeckoperchinggripperService extends StartGuestScienceService {
                     if (reportedDL != DL_) {
                       JSONObject delayFailureJson = new JSONObject();
                       delayFailureJson.put("ERROR", "Termianting with DL failure")
-                                    .put("Desired DL", DL_)
-                                    .put("Reported DL", reportedDL);
+                                    .put("Desired DL_MS", DL_)
+                                    .put("Reported DL_MS", reportedDL);
                       sendData(MessageType.JSON, "Exiting", delayFailureJson.toString());
                       return;
                     } else {
                       JSONObject dlSucceededJson = new JSONObject();
                       dlSucceededJson.put("Gripper Cmd", "Successfully set delay on gripper")
-                                    .put("DL", DL_);
+                                    .put("DL_MS", DL_);
                       sendData(MessageType.JSON, "Status", dlSucceededJson.toString());
                     }
 
@@ -762,7 +780,7 @@ public class StartGeckoperchinggripperService extends StartGuestScienceService {
       try{
         JSONObject json = new JSONObject();
         json.put("Current delay in ms is ", DL);
-        sendData(MessageType.JSON, "DL ", json.toString());
+        sendData(MessageType.JSON, "DL_MS ", json.toString());
       } catch (JSONException e) {
           // Send an error message to the GSM and GDS
           e.printStackTrace();

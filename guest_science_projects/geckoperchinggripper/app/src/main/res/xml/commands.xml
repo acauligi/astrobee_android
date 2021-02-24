@@ -61,6 +61,9 @@
             name="arm_deploy"
             syntax="{&quot;name&quot;: &quot;gecko_gripper_arm_deploy&quot;}" />
         <command
+            name="arm_deploy_90"
+            syntax="{&quot;name&quot;: &quot;gecko_gripper_arm_deploy_90&quot;}" />
+        <command
             name="perch_pan_test"
             syntax="{&quot;name&quot;: &quot;gecko_gripper_perch_pan_test&quot;}" />
         <command

@@ -346,6 +346,11 @@ public class ApiCommandImplementation {
         return getCommandResult(pendingResult, true, -1);
     }
 
+    public Result armDeployNinety() {
+        PendingResult pendingResult = robot.armPanAndTilt(0f, 90f, ActionType.BOTH);
+        return getCommandResult(pendingResult, true, -1);
+    }
+
     /**
      * An optional method used to print command execution results on the Android log
      * @param result
