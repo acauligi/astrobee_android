@@ -340,6 +340,22 @@ public class StartGeckoperchinggripperService extends StartGuestScienceService {
                     }
 
                     break;
+                case "gecko_gripper_arm_stow":
+                    boolean arm_stow_succeeded = api.armStow();
+                    JSONObject armStowResult = new JSONObject();
+                    try {
+                      if (arm_stow_succeeded) {
+                        armStowResult.put("Status", "Arm stow completed!");
+                      } else {
+                        armStowResult.put("Status", "Arm stow failed!");
+                      }
+                      sendData(MessageType.JSON, "Arm stow: ", armStowResult.toString());
+                    } catch (JSONException e) {
+                        // Send an error message to the GSM and GDS
+                        e.printStackTrace();
+                        sendData(MessageType.JSON, "data", "ERROR parsing JSON");
+                    }
+                    break;
                 case "gecko_gripper_perch_pan_test":
                     boolean pan_test_succeeded = api.perchPanTest();
                     JSONObject perchPanResult = new JSONObject();

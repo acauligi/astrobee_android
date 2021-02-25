@@ -351,6 +351,22 @@ public class ApiCommandImplementation {
         return getCommandResult(pendingResult, true, -1);
     }
 
+    public boolean armStow() {
+        PendingResult pendingResult = robot.armPanAndTilt(0f, 0f, ActionType.PAN);
+        Result result = getCommandResult(pendingResult, true, -1);
+
+        boolean succeeded = result.hasSucceeded();
+        if (!succeeded) {
+          return false;
+        }
+
+        pendingResult = robot.armPanAndTilt(0f, 180f, ActionType.TILT);
+        result = getCommandResult(pendingResult, true, -1);
+
+        succeeded = result.hasSucceeded();
+        return succeeded;
+    }
+
     /**
      * An optional method used to print command execution results on the Android log
      * @param result
